@@ -6,7 +6,7 @@ export default {
   ],
   theme: {
     extend: {
-      colors: {
+colors: {
         primary: "#0066FF",
         secondary: "#00D4FF", 
         accent: "#FF6B00",
@@ -14,6 +14,12 @@ export default {
         warning: "#FFB300",
         error: "#FF3B30",
         info: "#2196F3",
+        playstation: {
+          blue: "#003791",
+          lightblue: "#0070D1",
+          black: "#000000",
+          darkgray: "#1a1a1a"
+        }
       },
       fontFamily: {
         sans: ['Inter', 'system-ui', 'sans-serif'],

@@ -15,15 +15,15 @@ const QRPreview = ({
   useEffect(() => {
     if (!content || !canvasRef.current) return;
 
-    const generateQR = async () => {
+const generateQR = async () => {
       try {
         await QRCode.toCanvas(canvasRef.current, content, {
           width: size,
           margin: margin,
           errorCorrectionLevel: errorCorrectionLevel,
           color: {
-            dark: "#000000",
-            light: "#FFFFFF"
+            dark: "#003791", // PlayStation Blue
+            light: "#000000"  // Black background
           }
         });
         onGenerated?.(canvasRef.current);

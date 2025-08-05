@@ -28,14 +28,14 @@ const QRDisplay = ({
   const handleDownload = async () => {
     try {
       if (downloadSettings.format === "svg") {
-        const svgString = await QRCode.toString(content, {
+const svgString = await QRCode.toString(content, {
           type: "svg",
           width: downloadSettings.size,
           margin: qrSettings.margin,
           errorCorrectionLevel: qrSettings.errorCorrection,
           color: {
-            dark: "#000000",
-            light: "#FFFFFF"
+            dark: "#003791", // PlayStation Blue
+            light: "#000000"  // Black background
           }
         });
         
@@ -50,11 +50,11 @@ const QRDisplay = ({
         const canvas = document.createElement("canvas");
         await QRCode.toCanvas(canvas, content, {
           width: downloadSettings.size,
-          margin: qrSettings.margin,
+margin: qrSettings.margin,
           errorCorrectionLevel: qrSettings.errorCorrection,
           color: {
-            dark: "#000000",
-            light: "#FFFFFF"
+            dark: "#003791", // PlayStation Blue
+            light: "#000000"  // Black background
           }
         });
         
@@ -85,12 +85,11 @@ const handleCopyToClipboard = async () => {
         width: 512,
         margin: qrSettings.margin,
         errorCorrectionLevel: qrSettings.errorCorrection,
-        color: {
-          dark: "#000000",
-          light: "#FFFFFF"
+color: {
+          dark: "#003791", // PlayStation Blue
+          light: "#000000"  // Black background
         }
       });
-      
       canvas.toBlob(async (blob) => {
         if (!blob) {
           toast.error("Failed to generate QR code image");

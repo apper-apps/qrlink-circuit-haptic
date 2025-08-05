@@ -25,12 +25,11 @@ const BatchGenerator = ({ className }) => {
           width: 512,
           margin: 4,
           errorCorrectionLevel: "M",
-          color: {
-            dark: "#000000",
-            light: "#FFFFFF"
+color: {
+            dark: "#003791", // PlayStation Blue
+            light: "#000000"  // Black background
           }
         });
-        
         const dataURL = canvas.toDataURL("image/png");
         const base64Data = dataURL.replace(/^data:image\/png;base64,/, "");
         

@@ -20,9 +20,9 @@ const CustomizationPanel = ({
     { value: "H", label: "High (~30%)" }
   ];
 
-  return (
+return (
     <div className={cn("space-y-6", className)}>
-      <h3 className="text-lg font-semibold text-gray-900">Customization</h3>
+      <h3 className="text-lg font-semibold text-gray-900">PlayStation QR Customization</h3>
       
       <div className="space-y-4">
         <div>
