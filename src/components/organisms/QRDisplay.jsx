@@ -13,10 +13,13 @@ const QRDisplay = ({
   type = "url",
   className 
 }) => {
-  const [qrSettings, setQrSettings] = useState({
+const [qrSettings, setQrSettings] = useState({
     size: 256,
     margin: 4,
-    errorCorrection: "M"
+    errorCorrection: "M",
+    colorTheme: "playstation",
+    backgroundColor: "#000000",
+    foregroundColor: "#003791"
   });
   const [downloadSettings, setDownloadSettings] = useState({
     format: "png",
@@ -33,9 +36,9 @@ const svgString = await QRCode.toString(content, {
           width: downloadSettings.size,
           margin: qrSettings.margin,
           errorCorrectionLevel: qrSettings.errorCorrection,
-          color: {
-            dark: "#003791", // PlayStation Blue
-            light: "#000000"  // Black background
+color: {
+            dark: qrSettings.foregroundColor,
+            light: qrSettings.backgroundColor
           }
         });
         
@@ -52,9 +55,9 @@ const svgString = await QRCode.toString(content, {
           width: downloadSettings.size,
 margin: qrSettings.margin,
           errorCorrectionLevel: qrSettings.errorCorrection,
-          color: {
-            dark: "#003791", // PlayStation Blue
-            light: "#000000"  // Black background
+color: {
+            dark: qrSettings.foregroundColor,
+            light: qrSettings.backgroundColor
           }
         });
         
@@ -86,8 +89,8 @@ const handleCopyToClipboard = async () => {
         margin: qrSettings.margin,
         errorCorrectionLevel: qrSettings.errorCorrection,
 color: {
-          dark: "#003791", // PlayStation Blue
-          light: "#000000"  // Black background
+          dark: qrSettings.foregroundColor,
+          light: qrSettings.backgroundColor
         }
       });
       canvas.toBlob(async (blob) => {
@@ -130,12 +133,16 @@ color: {
             </div>
           </div>
           
-          <QRPreview
+<QRPreview
             content={content}
             size={qrSettings.size}
             margin={qrSettings.margin}
             errorCorrectionLevel={qrSettings.errorCorrection}
+            colorTheme={qrSettings.colorTheme}
+            backgroundColor={qrSettings.backgroundColor}
+            foregroundColor={qrSettings.foregroundColor}
             onGenerated={handleQRGenerated}
+            className="playstation-qr"
           />
           
           <div className="border-t pt-4">
@@ -173,13 +180,19 @@ color: {
         </div>
         
         {showCustomization && (
-          <CustomizationPanel
+<CustomizationPanel
             size={qrSettings.size}
             onSizeChange={(size) => setQrSettings(prev => ({ ...prev, size }))}
             margin={qrSettings.margin}
             onMarginChange={(margin) => setQrSettings(prev => ({ ...prev, margin }))}
             errorCorrection={qrSettings.errorCorrection}
             onErrorCorrectionChange={(errorCorrection) => setQrSettings(prev => ({ ...prev, errorCorrection }))}
+            colorTheme={qrSettings.colorTheme}
+            onColorThemeChange={(colorTheme) => setQrSettings(prev => ({ ...prev, colorTheme }))}
+            backgroundColor={qrSettings.backgroundColor}
+            onBackgroundColorChange={(backgroundColor) => setQrSettings(prev => ({ ...prev, backgroundColor }))}
+            foregroundColor={qrSettings.foregroundColor}
+            onForegroundColorChange={(foregroundColor) => setQrSettings(prev => ({ ...prev, foregroundColor }))}
           />
         )}
       </div>

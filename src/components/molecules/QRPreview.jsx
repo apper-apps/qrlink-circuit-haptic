@@ -7,6 +7,9 @@ const QRPreview = ({
   size = 256, 
   margin = 4,
   errorCorrectionLevel = "M",
+  colorTheme = "playstation",
+  backgroundColor = "#000000",
+  foregroundColor = "#003791",
   className,
   onGenerated
 }) => {
@@ -20,10 +23,10 @@ const generateQR = async () => {
         await QRCode.toCanvas(canvasRef.current, content, {
           width: size,
           margin: margin,
-          errorCorrectionLevel: errorCorrectionLevel,
+errorCorrectionLevel: errorCorrectionLevel,
           color: {
-            dark: "#003791", // PlayStation Blue
-            light: "#000000"  // Black background
+            dark: foregroundColor,
+            light: backgroundColor
           }
         });
         onGenerated?.(canvasRef.current);

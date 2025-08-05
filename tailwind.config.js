@@ -14,11 +14,13 @@ colors: {
         warning: "#FFB300",
         error: "#FF3B30",
         info: "#2196F3",
-        playstation: {
+playstation: {
           blue: "#003791",
           lightblue: "#0070D1",
           black: "#000000",
-          darkgray: "#1a1a1a"
+          darkgray: "#1a1a1a",
+          silver: "#C0C0C0",
+          accent: "#00D4FF"
         }
       },
       fontFamily: {
