@@ -19,7 +19,7 @@ const [qrSettings, setQrSettings] = useState({
     errorCorrection: "M",
     colorTheme: "playstation",
     backgroundColor: "#000000",
-    foregroundColor: "#003791"
+    foregroundColor: "#FFFFFF"
   });
   const [downloadSettings, setDownloadSettings] = useState({
     format: "png",
@@ -27,6 +27,32 @@ const [qrSettings, setQrSettings] = useState({
   });
   const [showCustomization, setShowCustomization] = useState(false);
   const canvasRef = useRef(null);
+
+const addWhatsAppLogo = (canvas) => {
+    const ctx = canvas.getContext('2d');
+    const logoSize = Math.min(canvas.width, canvas.height) * 0.15;
+    const centerX = canvas.width / 2;
+    const centerY = canvas.height / 2;
+    
+    // Create white background circle for logo
+    ctx.fillStyle = '#FFFFFF';
+    ctx.beginPath();
+    ctx.arc(centerX, centerY, logoSize / 2 + 4, 0, 2 * Math.PI);
+    ctx.fill();
+    
+    // Add WhatsApp green background
+    ctx.fillStyle = '#25D366';
+    ctx.beginPath();
+    ctx.arc(centerX, centerY, logoSize / 2, 0, 2 * Math.PI);
+    ctx.fill();
+    
+    // Add WhatsApp icon (simplified phone symbol)
+    ctx.fillStyle = '#FFFFFF';
+    ctx.font = `${logoSize * 0.6}px Arial`;
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    ctx.fillText('📱', centerX, centerY);
+  };
 
   const handleDownload = async () => {
     try {
@@ -50,7 +76,7 @@ color: {
         a.click();
         URL.revokeObjectURL(url);
       } else {
-        const canvas = document.createElement("canvas");
+const canvas = document.createElement("canvas");
         await QRCode.toCanvas(canvas, content, {
           width: downloadSettings.size,
 margin: qrSettings.margin,
@@ -60,6 +86,9 @@ color: {
             light: qrSettings.backgroundColor
           }
         });
+        
+        // Add WhatsApp logo to center
+        addWhatsAppLogo(canvas);
         
         const url = canvas.toDataURL("image/png");
         const a = document.createElement("a");
@@ -83,7 +112,7 @@ const handleCopyToClipboard = async () => {
         return;
       }
 
-      const canvas = document.createElement("canvas");
+const canvas = document.createElement("canvas");
       await QRCode.toCanvas(canvas, content, {
         width: 512,
         margin: qrSettings.margin,
@@ -93,6 +122,10 @@ color: {
           light: qrSettings.backgroundColor
         }
       });
+      
+      // Add WhatsApp logo to center
+      addWhatsAppLogo(canvas);
+      
       canvas.toBlob(async (blob) => {
         if (!blob) {
           toast.error("Failed to generate QR code image");
